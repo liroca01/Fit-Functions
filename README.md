@@ -35,6 +35,8 @@ import fit_functions
 velocities = fit_functions.fit_velocities('data.csv')
 print(velocities)
 
+```
+
 ## Requirements
 
 - Python 3.x
