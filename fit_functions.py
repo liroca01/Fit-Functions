@@ -9,7 +9,7 @@ def my_line(x,a,b):
 
 def fit_timeseries(tlist,yliglogst):
     m,mcov = scp.optimize.curve_fit(my_line,tlist,yliglogst,p0=[0,0])
-    return m[0], np.sqrt(mcov[0, 0])
+    return m[1], np.sqrt(mcov[1, 1])
 
 
 def fit_velocities(filename):
