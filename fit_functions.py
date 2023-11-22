@@ -1,6 +1,7 @@
 import scipy as scp
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 import glob
 import os
 
@@ -39,7 +40,7 @@ def fit_tide_gauge(filename):
 
 def fit_all_velocities(folder, pattern, type):
     results = []
-    file_list = glob.glob(folder + pattern)
+    file_list = glob.glob(folder + '/' + pattern)
     if type == "GNSS":
         for file_path in file_list:
             site_name, _ = os.path.splitext(os.path.basename(file_path))
@@ -55,4 +56,25 @@ def fit_all_velocities(folder, pattern, type):
             results.append([site_name, velocity])
         df = pd.DataFrame(results, columns =['Filename','Velocity'])
         
+<<<<<<< Updated upstream
     return df
+=======
+    # Creating plot
+    fig, ax = plt.subplots(figsize = (12, 7))
+    quiver = ax.quiver(df['Longitude'], df['Latitude'], df['Velocity_E'], df['Velocity_N'])
+    scatter = ax.scatter(df['Longitude'], df['Latitude'], c = df['Velocity_U'], cmap = "plasma")
+    
+    ax.grid() #Add gridlines
+
+    #Labeling of the spatial plot
+    plt.xlabel("Longitude")
+    plt.ylabel("Latitude")
+    plt.title('%s Velocities Map' %type)
+    
+    cbar = fig.colorbar(scatter, ax=ax, label = "U Velocities")
+    
+    # Show plot
+    plt.show()
+    
+    return(df)
+>>>>>>> Stashed changes
